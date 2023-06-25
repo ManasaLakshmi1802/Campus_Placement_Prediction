@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 import numpy as np
 import pandas as pd
 import pickle
@@ -35,9 +35,9 @@ def predict():
 	# return render_template('index.html', pred = pred)
 
 	if pred == 1:
-		return render_template('index.html', pred = "The student is PLACED")
+		return render_template('output.html', pred = "The student is PLACED")
 	else:
-		return render_template('index.html', pred = "The student is NOT PLACED")
+		return render_template('output.html', pred = "The student is NOT PLACED")
 
 
 
