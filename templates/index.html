@@ -14,7 +14,7 @@
 		
 	<div class="input">
 		
-		<form action="/predict", method="post">
+		<form action="/predict" method="post" enctype="multipart/form-data">
 			<div class="input_features">
 				<label for="gender">Gender: </label>
 				<select id="gender" name="gender" required>
@@ -54,7 +54,10 @@
 				<input type="number" id="num_proj" name="num_proj"><br><br>
 
 				<label for="num_cert">Number of Global Certifications: </label>
-				<input type="number" id="num_cert" name="num_cert"><br><br>
+				<input type="number" id="num_cert" name="num_cert">
+				<input type="file" id="pdfFile" accept="application/pdf">
+    			<input type="button" value="Upload" onclick="displayFile()"> See below for uploaded file!
+				<br><br>
 
 				<label for="git_acc">Do you have a git hub account? </label>
 				<select id="git_acc" name="git_acc" required>
@@ -70,12 +73,26 @@
 				<input class = btn type="submit" value="Predict">
 			</div>
 		</form>
-
 	</div>
 
-	<div class="output">
-		<h2>Campus Placement Prediction result: </h2>
-		<p>Predicted Status is: <strong>{{pred}}</strong></p>
-	</div>
+	<iframe id="pdfViewer" style="width: 100%; height: 600px;"></iframe>
+
+  	<script>
+    	function displayFile() {
+      		var fileInput = document.getElementById('pdfFile');
+      		var file = fileInput.files[0];
+      
+      		if (file) {
+        		var reader = new FileReader();
+        		reader.onload = function(e) {
+          			var pdfData = e.target.result;
+          			var pdfViewer = document.getElementById('pdfViewer');
+          			pdfViewer.src = pdfData;
+        		};
+        		reader.readAsDataURL(file);
+      		}
+    	}
+  	</script>
+	
 </body>
 </html>
