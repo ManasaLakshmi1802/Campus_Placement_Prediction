@@ -54,6 +54,7 @@ input[type=number]:hover, select:hover{
 
 .pred_btn{
 	text-align: center;
+	margin: 30px auto;
 }
 
 .output{
